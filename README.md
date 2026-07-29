@@ -29,8 +29,8 @@ hcho_cs/                            multi-run emissions comparison (TEMPO/TROPOM
     ├── mm_paths.py                 output path scheme (imported by the native pairers)
     ├── pair_daily_sat.py           per-day satellite pairing
     ├── pair_daily_sfc.py           per-day surface pairing
-    ├── pair_tempo_native.py        TEMPO conservative -> native swath
-    ├── pair_tropomi_native.py      TROPOMI conservative -> native swath
+    ├── pair_tempo_native.py        TEMPO pairing; REGRID_TARGET=model|obs|swath (default model)
+    ├── pair_tropomi_native.py      TROPOMI pairing; REGRID_TARGET=model|obs|swath (default model)
     ├── plot_sat.py                 satellite plotting
     ├── check_work_mm.py            audits paired output; exits 1 so it can gate plotting
     ├── test_xregrid_probe.py       reproducer for the 2x conservative weight bug
