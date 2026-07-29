@@ -1,0 +1,37 @@
+# Data -- never commit. Everything here is regenerable from the raw archives
+# on GLADE, and committing it is what bloated the earlier campaign directories.
+*.nc
+*.nc4
+*.h5
+*.he5
+*.hdf
+*.ict
+*.grb
+*.grib2
+
+# Run output
+output/
+outputs/
+paired/
+montages/
+*.png
+*.pdf
+!docs/figures/*.png          # curated figures for the README are allowed
+
+# Batch / scheduler artifacts
+*.o[0-9]*
+*.e[0-9]*
+*.pbs.out
+PET*.ESMF_LogFile
+core.*
+
+# Python
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.venv/
+*.egg-info/
+
+# Editor / OS
+.DS_Store
+*.swp
