@@ -77,4 +77,10 @@ for RUN in mxcat grapes biog nonbiog; do for P in hcho no2; do
     -l select=1:ncpus=8:mem=400GB -l walltime=04:00:00 \
     -v RUN=$RUN,TEMPO_PRODUCTS=$P,REGRID_METHOD=conservative,REGRID_TARGET=model,SZA_FILTER=on \
     submit_pair_tempo_native.sh
-done; done   
+done; done  
+
+
+# Filename convention
+{city}_{restag}_{method}_{ymd}_{obs}_{model}_{target}.nc4 for city products, model_{method}_{ymd}_{obs}_{model}.nc4 for the full-mesh product. Env knobs: RUN, CITY, REGRID_TARGET∈{obs,swath,model}, REGRID_METHOD (→ cons), TROPOMI_PRODUCTS, OBS_GRID_RES (TEMPO 0.03, TROPOMI 0.05), YMD (from array index).
+
+
