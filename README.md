@@ -58,7 +58,7 @@ poster_figs/                        figure notebooks
 
 MELODIES MONET reads surface point data through its AirNow reader, so the Thai
 and Philippine national monitoring exports are reshaped to match that schema
-rather than given a new reader. A control can then set `use_airnow: true` and
+rather than give them a new reader. A control can then set `use_airnow: true` and
 treat them like any other surface network.
 
 - `write_met_data/thai_to_airnow.ipynb`
@@ -109,11 +109,6 @@ unstructured sources — it chunks with `isel(n_face=slice(...))`, which uxarray
 `Grid.isel` rejects. There is an opt-in shim behind `MM_XREGRID_PARALLEL`, but
 serial is the reliable configuration.
 
-> **The 2x weight bug.** The installed xregrid's conservative weights row-sum to
-> ~2 instead of 1, silently doubling every conservative product.
-> `regrid_util._coverage_normalize` corrects it. Any conservative output produced
-> before that fix is 2x too high and must be regenerated.
-
 ### Job granularity
 
 TROPOMI pairing OOMs at 350 GB if both models load at once. The working
@@ -145,8 +140,7 @@ encoded and jobs never collide.
 
 - `-J n-n` is rejected — a degenerate array range is an error, not a no-op.
 - `-v` lists must have **no spaces**: `-v A=1, B=2` silently drops `B`.
-- Memory scales with the target mesh, not the granule: mxcat ~150 GB,
-  ne0CONUS ne30x8 200-400 GB for full-mesh runs.
+- Memory scales with the target mesh, not the granule. I have been using 250+ GB for these jobs
 
 ### QA and screening
 
@@ -169,8 +163,7 @@ retrieval noise distribution and clipping biases the mean high.
 ## 4. Known data issues
 
 - **TROPOMI CO striping** is a retrieval artifact in the H1 product, not a
-  pairing bug (it correlates r~+0.92 with observed texture). Pair the
-  `_corrected` variable instead.
+  pairing bug. Pair the `_corrected` variable instead.
 - **Diurnal plots from polar orbiters** are close to meaningless — TROPOMI
   samples a location roughly once per day. MELODIES MONET warns when a diurnal
   cycle has <=3 distinct hours.
@@ -210,19 +203,17 @@ Raw inputs are **not** in this repository. The Philippine (~2.7 GB) and Thai
 history archives all live on NCAR GLADE. The converted products are regenerable
 from them.
 
-Consequence worth stating plainly: `thai_to_airnow.ipynb` and
+NOTE: `thai_to_airnow.ipynb` and
 `philippines_to_airnow.ipynb` **cannot be re-run from a fresh clone** without
 those inputs. They are kept here as the authoritative record of the conversion
 logic.
 
 For access to the raw national network data, the campaign archives, or questions
-about the ASIA-AQ evaluation setup, contact **gaubert@ucar.edu**.
+about the ASIA-AQ evaluation setup, contact **gaubert@ucar.edu** or **liam.thompson@utah.edu***.
 
 ## Environment
 
 Built against the `melodies-monet` conda environment on NCAR Casper, plus
 `uxarray` and `xregrid`, which are optional MELODIES MONET dependencies:
 
-```bash
-pip install melodies-monet[unstructured]
-```
+
