@@ -18,6 +18,25 @@ pairing — was contributed upstream to MELODIES MONET; see
 ## Contents
 
 ```
+hcho_cs/                            multi-run emissions comparison (TEMPO/TROPOMI HCHO)
+├── control_tempo_l2_hcho_cesm_se.yaml
+└── batch_scripts/
+    ├── control_master.yaml         satellite master -- shared obs, mapping, plots, stats
+    ├── control_sfc_master.yaml     surface master
+    ├── runs.yaml                   per-run overrides only (dirs, model files, SCRIP, domains)
+    ├── make_controls.py            renders control_<run>.yaml from master + runs.yaml
+    ├── make_native_controls.py     native obs-space variants
+    ├── mm_paths.py                 output path scheme (imported by the native pairers)
+    ├── pair_daily_sat.py           per-day satellite pairing
+    ├── pair_daily_sfc.py           per-day surface pairing
+    ├── pair_tempo_native.py        TEMPO conservative -> native swath
+    ├── pair_tropomi_native.py      TROPOMI conservative -> native swath
+    ├── plot_sat.py                 satellite plotting
+    ├── check_work_mm.py            audits paired output; exits 1 so it can gate plotting
+    ├── test_xregrid_probe.py       reproducer for the 2x conservative weight bug
+    ├── get_aqs.sh                  AQS obs fetch
+    └── submit_*.sh                 PBS wrappers
+
 asiaaq_cs/                          ASIA-AQ campaign (Feb-Mar 2024)
 ├── pair_tropomi_day.py             TROPOMI pairing driver: 1 job = 1 day x 1 model x 1 product
 ├── submit_pair_tropomi_day.sh      its PBS submission
