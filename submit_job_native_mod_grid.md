@@ -16,6 +16,8 @@ https://github.com/L12D2/monetio_uxarray
 
 ---
 
+The base quality flag is applied by default, unless `NO_QA=on`.
+
 # TEMPO
 
 ## Model mesh (filtered)
