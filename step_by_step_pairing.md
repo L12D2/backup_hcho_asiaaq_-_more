@@ -27,6 +27,7 @@ python -c "import monetio, melodies_monet; print(monetio.__file__); print(melodi
 ```
 
 - This installs the asia_aq_cs branch of my MELODIES MONET work: https://github.com/L12D2/mm_uxarray/tree/asia_aq_cs
+- Both printed paths must point inside the directories you just cloned (./monetio_uxarray/monetio/__init__.py and ./mm_uxarray/melodies_monet/__init__.py). If either shows a site-packages/ path instead, conda's copy is shadowing the editable install and none of my changes are active — rerun the conda remove --force-remove -y monetio step, then reinstall.
 - `-e` installs an editable version of my branch to your own environment
   - Why use `-e`?
     - As of July 31, 2026, this code has not been PR’d by the MELODIES MONET team. By using this branch, you have access to all the features and updates I made in Summer 2026. `-e` will allow you to scale this existing code to meet your needs as ingesting PRs can take considerable time.
@@ -139,6 +140,7 @@ done
 - In the submit_pair_tempo_native.sh and submit_pair_tropomi_native.sh files make sure to **change cd /glade/u/home/lcthompson/mm/MELODIES-MONET/docs/examples/ungridded_support/unstructured_grid_read_uxarray/hcho_ben_gaubert_cs/batch_scripts to YOUR own directory**.
 - In mm_paths.py **change ROOT = os.environ.get("MM_OUTPUT_ROOT", "/glade/work/lcthompson/mm_output_v2")** to directory of your choice
 - Each qsub submits a 30-element job array — one element per day of June 2024, 6 running at a time. As written, the TEMPO block submits 240 jobs and the TROPOMI block submits 480. Add -J 1-1 to the qsub line for a single-day test first. The idea is **1 job for 1 day of pairing for 1 satellite product.**
+- Memory exceedance continues to be an issue due to lack of parallelization.
 
 ---
 
