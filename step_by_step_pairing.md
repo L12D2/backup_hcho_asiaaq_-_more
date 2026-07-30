@@ -38,7 +38,7 @@ https://github.com/L12D2/backup_hcho_asiaaq_-_more/tree/main/hcho_cs/batch_scrip
 
 **https://github.com/L12D2/backup_hcho_asiaaq_-_more/tree/main/hcho_cs/batch_scripts** **IS NOT A MELODIES MONET ENVIRONMENT.**
 
-It is simply where documented copies to run pairing are stored. You can download them directly and place them in a folder of your choice within the MELODIES MONET environment you created in Step 1.
+It is simply where documented copies to run pairing are stored. You can download them directly and place them in a folder of your choice within the MELODIES MONET environment you created in Step 1. Alternatively, just work in the batch_scripts file path on the asia_aq_cs branch and refer to the following files that you need to run pairing. 
 
 You can also find copies of them in the `asia_aq_cs` branch and use them directly there.
 
@@ -52,20 +52,22 @@ https://github.com/L12D2/backup_hcho_asiaaq_-_more/tree/main/hcho_cs/batch_scrip
 
 ## To run pairing for TEMPO
 
-You need these three files:
+You need these files:
 
 1. https://github.com/L12D2/backup_hcho_asiaaq_-_more/blob/main/hcho_cs/batch_scripts/control_tempo_native.yaml
 2. https://github.com/L12D2/backup_hcho_asiaaq_-_more/blob/main/hcho_cs/batch_scripts/pair_tempo_native.py
 3. https://github.com/L12D2/backup_hcho_asiaaq_-_more/blob/main/hcho_cs/batch_scripts/submit_pair_tempo_native.sh
+4. https://github.com/L12D2/backup_hcho_asiaaq_-_more/blob/main/hcho_cs/batch_scripts/mm_paths.py
 
 ## To run pairing for TROPOMI
 
-When I wrote the TROPOMI pairing, it essentially embeds the YAML file you would be using in the TEMPO example above.
-
-You need these two files:
+You need these files:
 
 1. https://github.com/L12D2/backup_hcho_asiaaq_-_more/blob/main/hcho_cs/batch_scripts/pair_tropomi_native.py
 2. https://github.com/L12D2/backup_hcho_asiaaq_-_more/blob/main/hcho_cs/batch_scripts/submit_pair_tropomi_native.sh
+3. https://github.com/L12D2/backup_hcho_asiaaq_-_more/blob/main/hcho_cs/batch_scripts/mm_paths.py
+4. https://github.com/L12D2/backup_hcho_asiaaq_-_more/blob/main/hcho_cs/batch_scripts/control_tempo_native.yaml
+5. https://github.com/L12D2/backup_hcho_asiaaq_-_more/blob/main/hcho_cs/batch_scripts/pair_tempo_native.py
 
 Either keep these in the `batch_scripts` directory or move them to fit your own organization method.
 
@@ -86,23 +88,26 @@ conda activate melodies-monet
 
 ## To run pairing for TEMPO
 
-You need these three files:
+You need these files:
 
 1. https://github.com/L12D2/backup_hcho_asiaaq_-_more/blob/main/hcho_cs/batch_scripts/control_tempo_native.yaml
 2. https://github.com/L12D2/backup_hcho_asiaaq_-_more/blob/main/hcho_cs/batch_scripts/pair_tempo_native.py
 3. https://github.com/L12D2/backup_hcho_asiaaq_-_more/blob/main/hcho_cs/batch_scripts/submit_pair_tempo_native.sh
+4. https://github.com/L12D2/backup_hcho_asiaaq_-_more/blob/main/hcho_cs/batch_scripts/mm_paths.py
 
 ## To run pairing for TROPOMI
 
-When I wrote the TROPOMI pairing, it essentially embeds the YAML file you would be using in the TEMPO example above.
-
-You need these two files:
+You need these files:
 
 1. https://github.com/L12D2/backup_hcho_asiaaq_-_more/blob/main/hcho_cs/batch_scripts/pair_tropomi_native.py
 2. https://github.com/L12D2/backup_hcho_asiaaq_-_more/blob/main/hcho_cs/batch_scripts/submit_pair_tropomi_native.sh
+3. https://github.com/L12D2/backup_hcho_asiaaq_-_more/blob/main/hcho_cs/batch_scripts/mm_paths.py
+4. https://github.com/L12D2/backup_hcho_asiaaq_-_more/blob/main/hcho_cs/batch_scripts/control_tempo_native.yaml
+5. https://github.com/L12D2/backup_hcho_asiaaq_-_more/blob/main/hcho_cs/batch_scripts/pair_tempo_native.py
 
 Once you are in that folder, copy and paste the block below:
 
+**TEMPO** 
 ```bash
 for RUN in mxcat grapes biog nonbiog; do
   for P in hcho no2; do
@@ -114,6 +119,22 @@ for RUN in mxcat grapes biog nonbiog; do
 done
 ```
 
+**TROPOMI** 
+```bash
+for RUN in mxcat grapes biog nonbiog; do
+  for P in no2 hcho; do
+    for TGT in model swath; do
+      qsub -N tr_${RUN}_${P}_${TGT}_cld1sza1 -o tr_${RUN}_${P}_${TGT}_cld1sza1.log \
+        -l select=1:ncpus=8:mem=250GB -l walltime=03:00:00 \
+        -v RUN=$RUN,TROPOMI_PRODUCTS=$P,REGRID_METHOD=conservative,REGRID_TARGET=$TGT,CLOUD_FILTER=on,SZA_FILTER=on \
+        submit_pair_tropomi_native.sh
+    done
+  done
+done
+```
+
+- In the submit_pair_month.sh file make sure to **change cd /glade/u/home/lcthompson/mm/MELODIES-MONET/docs/examples/ungridded_support/unstructured_grid_read_uxarray/hcho_ben_gaubert_cs/batch_scripts to YOUR own directory**.
+- In mm_paths.py **change ROOT = os.environ.get("MM_OUTPUT_ROOT", "/glade/work/lcthompson/mm_output_v2")** to directory of your choice
 - This will submit **1 job for 1 day of pairing for 1 satellite product.**
 - Memory exceedance continues to be an issue due to lack of parallelization.
 
