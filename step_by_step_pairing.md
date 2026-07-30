@@ -1,38 +1,32 @@
 # MELODIES MONET Pairing Guide
 
-## Contact
-
-**Contact:** <liam.thompson@utah.edu>
+**Contact:** liam.thompson@utah.edu
 
 - Please do not hesitate to reach out.
 
----
-
 # 1. How to run from scratch
 
-- I recommend creating a new environment **EVEN if you are an existing MELODIES MONET user**.
+- I recommend creating a new environment EVEN if you are an existing MELODIES MONET user
 
 ```bash
 conda create --name melodies-monet python=3.11
 conda activate melodies-monet
 
-conda install -y -c conda-forge pyyaml pandas=2 monet monetio \
-  "netcdf4<1.7" "setuptools<70" "dask>=2024.2.1" wrf-python \
-  "cartopy=0.24" metpy windrose statannotations \
-  typer pooch jupyterlab
+conda install -y -c conda-forge pyyaml pandas=2 monet monetio "netcdf4<1.7" "setuptools<70" "dask>=2024.2.1" wrf-python "cartopy=0.24" metpy windrose statannotations typer pooch jupyterlab
 
-pip install --no-deps -e https://github.com/L12D2/mm_uxarray/archive/asia_aq_cs.zip
+conda remove --force-remove -y monetio
+
+git clone -b asia_aq_cs https://github.com/L12D2/mm_uxarray.git
+
+git clone https://github.com/L12D2/monetio_uxarray.git
+
+pip install --no-deps -e ./monetio_uxarray -e ./mm_uxarray
 ```
 
-- This installs the `asia_aq_cs` branch of my MELODIES MONET work:
-  - https://github.com/L12D2/mm_uxarray/tree/asia_aq_cs
-- `-e` installs an editable version of my branch to your own environment.
-
-### Why use `-e`?
-
-- As of July 31, 2026, this code has not been PR'd by the MELODIES MONET team.
-- By using this branch, you have access to all the features and updates I made in Summer 2026.
-- `-e` allows you to scale this existing code to meet your needs, as ingesting PRs can take considerable time.
+- This installs the asia_aq_cs branch of my MELODIES MONET work: https://github.com/L12D2/mm_uxarray/tree/asia_aq_cs
+- `-e` installs an editable version of my branch to your own environment
+  - Why use `-e`?
+    - As of July 31, 2026, this code has not been PR’d by the MELODIES MONET team. By using this branch, you have access to all the features and updates I made in Summer 2026. `-e` will allow you to scale this existing code to meet your needs as ingesting PRs can take considerable time.
 
 ---
 
