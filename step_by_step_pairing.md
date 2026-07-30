@@ -21,6 +21,9 @@ git clone -b asia_aq_cs https://github.com/L12D2/mm_uxarray.git
 git clone https://github.com/L12D2/monetio_uxarray.git
 
 pip install --no-deps -e ./monetio_uxarray -e ./mm_uxarray
+
+python -c "import monetio, melodies_monet; print(monetio.__file__); print(melodies_monet.__file__)"
+
 ```
 
 - This installs the asia_aq_cs branch of my MELODIES MONET work: https://github.com/L12D2/mm_uxarray/tree/asia_aq_cs
@@ -133,10 +136,9 @@ for RUN in mxcat grapes biog nonbiog; do
 done
 ```
 
-- In the submit_pair_month.sh file make sure to **change cd /glade/u/home/lcthompson/mm/MELODIES-MONET/docs/examples/ungridded_support/unstructured_grid_read_uxarray/hcho_ben_gaubert_cs/batch_scripts to YOUR own directory**.
+- In the submit_pair_tempo_native.sh and submit_pair_tropomi_native.sh files make sure to **change cd /glade/u/home/lcthompson/mm/MELODIES-MONET/docs/examples/ungridded_support/unstructured_grid_read_uxarray/hcho_ben_gaubert_cs/batch_scripts to YOUR own directory**.
 - In mm_paths.py **change ROOT = os.environ.get("MM_OUTPUT_ROOT", "/glade/work/lcthompson/mm_output_v2")** to directory of your choice
-- This will submit **1 job for 1 day of pairing for 1 satellite product.**
-- Memory exceedance continues to be an issue due to lack of parallelization.
+- Each qsub submits a 30-element job array — one element per day of June 2024, 6 running at a time. As written, the TEMPO block submits 240 jobs and the TROPOMI block submits 480. Add -J 1-1 to the qsub line for a single-day test first. The idea is **1 job for 1 day of pairing for 1 satellite product.**
 
 ---
 
