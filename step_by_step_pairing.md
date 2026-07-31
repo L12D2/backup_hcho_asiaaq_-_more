@@ -143,7 +143,7 @@ In your terminal:
 
 ```bash
 module load conda/latest
-conda activate your_env_name
+conda activate <your_env_name>
 ```
 
 `cd` to where you have these files located.
