@@ -43,7 +43,12 @@ python -c "import monetio, melodies_monet; print(monetio.__file__); print(melodi
 - `-e` installs an editable version of my branch to your own environment
   - Why use `-e`?
     - As of July 31, 2026, this code has not been PR’d by the MELODIES MONET team. By using this branch, you have access to all the features and updates I made in Summer 2026. `-e` will allow you to scale this existing code to meet your needs as ingesting PRs can take considerable time.
-    - 
+    - You can import melodies_monet from any directory
+    -  the editable install doesn't care where you are. But the **pairing scripts find their YAMLs and mm_paths.py relative to the current directory, so submit them from batch_scripts/.**
+  
+- If you make changes to the code, it is ultimately up to you to keep a backup of those changes. Lots of guides online to do this via github. 
+  -  https://stackoverflow.com/questions/18200248/cloning-a-repo-from-someone-elses-github-and-pushing-it-to-a-repo-on-my-github
+  
 ## Complete example installation
 
 The transcript below shows a successful installation from a clean directory on Casper. You can compare your output against this if you encounter any issues.
