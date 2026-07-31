@@ -21,8 +21,8 @@ cd <folder_name>
 
 module load conda
 
-conda create --name melodies-monet python=3.11
-conda activate melodies-monet
+conda create --name <your_env_name> python=3.11
+conda activate <your_env_name>
 
 conda install -y -c conda-forge pyyaml pandas=2 monet monetio "netcdf4<1.7" "setuptools<70" "dask>=2024.2.1" wrf-python "cartopy=0.24" metpy windrose statannotations typer pooch jupyterlab
 
