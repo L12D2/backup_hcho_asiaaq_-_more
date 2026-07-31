@@ -9,8 +9,9 @@
 - I recommend creating a new environment EVEN if you are an existing MELODIES MONET user
 
 ```bash
-On casper/derecho, load conda first — it is not on PATH by default:
-    module load conda
+# On casper/derecho, load conda first — it is not on PATH by default:
+
+module load conda
 
 conda create --name melodies-monet python=3.11
 conda activate melodies-monet
