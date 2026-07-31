@@ -9,6 +9,11 @@
 - I recommend creating a new environment EVEN if you are an existing MELODIES MONET user
 
 ```bash
+
+# if you already have a MELODIES MONET and MONETIO folder, create a new directory so you can keep this code separate from the official working code.
+ 
+mkdir <folder_name>
+
 # On casper/derecho, load conda first — it is not on PATH by default:
 
 module load conda
