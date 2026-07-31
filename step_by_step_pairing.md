@@ -44,7 +44,9 @@ python -c "import monetio, melodies_monet; print(monetio.__file__); print(melodi
   - Why use `-e`?
     - As of July 31, 2026, this code has not been PR’d by the MELODIES MONET team. By using this branch, you have access to all the features and updates I made in Summer 2026. `-e` will allow you to scale this existing code to meet your needs as ingesting PRs can take considerable time.
     - You can import melodies_monet from any directory
-    -  the editable install doesn't care where you are. But the **pairing scripts find their YAMLs and mm_paths.py relative to the current directory, so submit them from batch_scripts/.**
+    -  the editable install doesn't care where you are. Keep all required files in the same directory
+    -  the scripts locate mm_paths.py and control_tempo_native.yaml next to themselves. You can put that directory anywhere; just point the cd in the submit script at it.
+
   
 - If you make changes to the code, it is ultimately up to you to keep a backup of those changes. Lots of guides online to do this via github. 
   -  https://stackoverflow.com/questions/18200248/cloning-a-repo-from-someone-elses-github-and-pushing-it-to-a-repo-on-my-github
@@ -125,7 +127,9 @@ You need these files:
 2. https://github.com/L12D2/backup_hcho_asiaaq_-_more/blob/main/hcho_cs/batch_scripts/submit_pair_tropomi_native.sh
 3. https://github.com/L12D2/backup_hcho_asiaaq_-_more/blob/main/hcho_cs/batch_scripts/mm_paths.py
 4. https://github.com/L12D2/backup_hcho_asiaaq_-_more/blob/main/hcho_cs/batch_scripts/control_tempo_native.yaml
-5. https://github.com/L12D2/backup_hcho_asiaaq_-_more/blob/main/hcho_cs/batch_scripts/pair_tempo_native.py
+   - These say tempo but they are needed for tropomi, sorry. 
+6. https://github.com/L12D2/backup_hcho_asiaaq_-_more/blob/main/hcho_cs/batch_scripts/pair_tempo_native.py
+   - These say tempo but they are needed for tropomi, sorry.
 
 Either keep these in the `batch_scripts` directory or move them to fit your own organization method.
 
@@ -161,7 +165,9 @@ You need these files:
 2. https://github.com/L12D2/backup_hcho_asiaaq_-_more/blob/main/hcho_cs/batch_scripts/submit_pair_tropomi_native.sh
 3. https://github.com/L12D2/backup_hcho_asiaaq_-_more/blob/main/hcho_cs/batch_scripts/mm_paths.py
 4. https://github.com/L12D2/backup_hcho_asiaaq_-_more/blob/main/hcho_cs/batch_scripts/control_tempo_native.yaml
+   - These say tempo but they are needed for tropomi, sorry. 
 5. https://github.com/L12D2/backup_hcho_asiaaq_-_more/blob/main/hcho_cs/batch_scripts/pair_tempo_native.py
+   - These say tempo but they are needed for tropomi, sorry.
 
 Once you are in that folder, copy and paste the block below:
 
