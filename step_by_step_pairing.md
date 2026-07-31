@@ -19,7 +19,7 @@ cd <folder_name>
 # On casper/derecho, load conda first — it is not on PATH by default:
 # --name DOES NOT HAVE to be melodies-monet esp if you already have an environment named melodies-monet
 
-module load conda
+module load conda/latest
 
 conda create --name <your_env_name> python=3.11
 conda activate <your_env_name>
@@ -59,7 +59,7 @@ The transcript below shows a successful installation from a clean directory on C
 lcthompson@casper06:~> mkdir test
 lcthompson@casper06:~> cd test
 
-lcthompson@casper06:~/test> module load conda
+lcthompson@casper06:~/test> module load conda/latest
 
 lcthompson@casper06:~/test> conda create --prefix /glade/work/$USER/conda-envs/mm-test-recipe python=3.11
 
@@ -143,7 +143,7 @@ In your terminal:
 
 ```bash
 module load conda/latest
-conda activate melodies-monet
+conda activate your_env_name
 ```
 
 `cd` to where you have these files located.
