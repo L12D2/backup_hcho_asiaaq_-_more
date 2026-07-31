@@ -6,15 +6,18 @@
 
 # 1. How to run from scratch
 
-- I recommend creating a new environment EVEN if you are an existing MELODIES MONET user
+- I recommend creating a new environment EVEN if you are an existing MELODIES MONET user. You can copy and paste this whole code here into a new folder and it should all download and install.
+
 
 ```bash
 
 # if you already have a MELODIES MONET and MONETIO folder, create a new directory so you can keep this code separate from the official working code.
  
 mkdir <folder_name>
+cd <folder_name>
 
 # On casper/derecho, load conda first — it is not on PATH by default:
+# --name DOES NOT HAVE to be melodies-monet esp if you already have an environment named melodies-monet
 
 module load conda
 
@@ -40,7 +43,44 @@ python -c "import monetio, melodies_monet; print(monetio.__file__); print(melodi
 - `-e` installs an editable version of my branch to your own environment
   - Why use `-e`?
     - As of July 31, 2026, this code has not been PR’d by the MELODIES MONET team. By using this branch, you have access to all the features and updates I made in Summer 2026. `-e` will allow you to scale this existing code to meet your needs as ingesting PRs can take considerable time.
+    - 
+## Complete example installation
 
+The transcript below shows a successful installation from a clean directory on Casper. You can compare your output against this if you encounter any issues.
+
+```text
+lcthompson@casper06:~> mkdir test
+lcthompson@casper06:~> cd test
+
+lcthompson@casper06:~/test> module load conda
+
+lcthompson@casper06:~/test> conda create --prefix /glade/work/$USER/conda-envs/mm-test-recipe python=3.11
+
+lcthompson@casper06:~/test> conda activate mm-test-recipe
+
+(mm-test-recipe) lcthompson@casper06:~/test> conda install -y -c conda-forge \
+    pyyaml pandas=2 monet monetio \
+    "netcdf4<1.7" "setuptools<70" \
+    "dask>=2024.2.1" wrf-python \
+    "cartopy=0.24" metpy windrose \
+    statannotations typer pooch jupyterlab
+
+(mm-test-recipe) lcthompson@casper06:~/test> conda remove --force-remove -y monetio
+
+(mm-test-recipe) lcthompson@casper06:~/test> git clone -b asia_aq_cs https://github.com/L12D2/mm_uxarray.git
+
+(mm-test-recipe) lcthompson@casper06:~/test> git clone https://github.com/L12D2/monetio_uxarray.git
+
+(mm-test-recipe) lcthompson@casper06:~/test> pip install --no-deps -e ./monetio_uxarray -e ./mm_uxarray
+
+(mm-test-recipe) lcthompson@casper06:~/test> python -c "import monetio, melodies_monet; print(monetio.__file__); print(melodies_monet.__file__)"
+
+/glade/u/home/lcthompson/test/monetio_uxarray/monetio/__init__.py
+/glade/u/home/lcthompson/test/mm_uxarray/melodies_monet/__init__.py
+
+(mm-test-recipe) lcthompson@casper06:~/test> ls
+mm_uxarray  monetio_uxarray
+```
 ---
 
 # 2. How to pair AFTER Step 1
